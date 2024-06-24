@@ -1,37 +1,32 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase/firebase.js';
 
-
-function SignIn() {
+function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      console.log('User signed in:', userCredential.user);
-      alert("Welcome you are signed in")
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      console.log('User signed up:', userCredential.user);
       // You can redirect the user to another page here, for example:
-      // history.push('/dashboard');
-      // Redirect to another page after successful sign-in
+      // history.push('/welcome');
     } catch (error) {
       setError(error.message);
-      alert(error.message);
     }
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-gray-800 p-8 rounded shadow-md w-full max-w-sm ">
-        <h2 className=" text-white text-2xl font-semibold mb-6 text-center">Sign In</h2>
+      <div className="bg-gray-800 p-8 rounded shadow-md w-full max-w-sm">
+        <h2 className="text-2xl font-semibold mb-6 text-center text-white">Sign Up</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label className="block text-sm font-medium text-white">
+            <label htmlFor="email" className="block text-sm font-medium text-white">
               Email
             </label>
             <input
@@ -61,18 +56,18 @@ function SignIn() {
             type="submit"
             className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
-            Sign In
+            Sign Up
           </button>
-          <p className="mt-4 text-center text-sm text-white">
-            Don't have an account?{' '}
-            <Link to="/signup" className="text-indigo-600 hover:text-indigo-500">
-              Sign up
-            </Link>
-          </p>
         </form>
+        <p className="mt-4 text-center text-sm text-white">
+          Already have an account?{' '}
+          <Link to="/signin" className="text-indigo-600 hover:text-indigo-500">
+            Sign in
+          </Link>
+        </p>
       </div>
     </div>
   );
 }
 
-export default SignIn;
+export default SignUp;
