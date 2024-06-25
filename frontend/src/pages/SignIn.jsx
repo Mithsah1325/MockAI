@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; // Step 1: Import useNavigate
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase/firebase.js';
 
@@ -8,6 +8,9 @@ function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
+  const navigate = useNavigate(); // Step 2: Use useNavigate hook
+
+
 
 
   const handleSubmit = async (e) => {
@@ -19,6 +22,7 @@ function SignIn() {
       // You can redirect the user to another page here, for example:
       // history.push('/dashboard');
       // Redirect to another page after successful sign-in
+      navigate('/'); // Step 3: Redirect to the home page
     } catch (error) {
       setError(error.message);
       alert(error.message);
@@ -65,7 +69,7 @@ function SignIn() {
           </button>
           <p className="mt-4 text-center text-sm text-white">
             Don't have an account?{' '}
-            <Link to="/signup" className="text-indigo-600 hover:text-indigo-500">
+            <Link to="/signup" className="bg-blue-700 hover:bg-blue-400">
               Sign up
             </Link>
           </p>
