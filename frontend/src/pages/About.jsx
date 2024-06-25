@@ -38,6 +38,7 @@ function About() {
             <img src="https://images.pexels.com/photos/5553080/pexels-photo-5553080.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Hobbies" className="rounded-lg shadow-lg" />
           </div>
         </div>
+        <div className=""></div>
 
       </section>
     </div>
