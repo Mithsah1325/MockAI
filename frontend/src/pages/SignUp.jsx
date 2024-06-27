@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; // Step 1: Import useNavigate hook
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase/firebase.js';
 
@@ -7,14 +7,17 @@ function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null); // State for success message
+  const navigate = useNavigate(); // Step 2: Use useNavigate hook
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       console.log('User signed up:', userCredential.user);
-      // You can redirect the user to another page here, for example:
-      // history.push('/welcome');
+      setSuccessMessage('You have been registered successfully!'); // Set success message on successful signup
+      // Redirect to the home page after sign up
+      navigate('/');
     } catch (error) {
       setError(error.message);
     }
@@ -65,6 +68,11 @@ function SignUp() {
             Sign in
           </Link>
         </p>
+        {successMessage && ( // Display success message if it exists
+          <div className="mt-4 bg-green-500 text-white rounded p-2 text-sm text-center">
+            {successMessage}
+          </div>
+        )}
       </div>
     </div>
   );
