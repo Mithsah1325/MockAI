@@ -5,6 +5,7 @@ import Contact from './pages/Contact.jsx'
 import SignIn from './pages/SignIn.jsx'
 import Navbar from './components/Navbar.jsx'
 import Footer from './components/Footer.jsx'
+import SignUp from './pages/SignUp.jsx'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
@@ -18,6 +19,8 @@ const App = () => {
           <Route path='/about' element={<About />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/signin' element={<SignIn />} />
+          <Route path='/signup' element={<SignUp />} />
+          <Route path='/signup' element={<SignUp />} />
         </Routes>
       </div>
       <Footer />
