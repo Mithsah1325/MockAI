@@ -11,6 +11,7 @@ const port = process.env.PORT;
 app.use(cors())
 app.use(bodyParser.json());
 
+
 //Email setup Nodemailer
 const transporter = nodemailer.createTransport({
     service: 'gmail',

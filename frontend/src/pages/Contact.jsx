@@ -16,7 +16,7 @@ function Contact() {
 
     try {
       // Send POST request to backend API with form data
-      await axios.post('http://localhost:5000/api/contact', { firstName, lastName, email, inquiry });
+      await axios.post('/api/contact', { firstName, lastName, email, inquiry });
       setStatus('Your inquiry has been submitted!'); // Update status on successful submission
       // Clear form fields after successful submission
       setFirstName('');
