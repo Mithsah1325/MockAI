@@ -17,6 +17,9 @@ function Navbar() {
             <li>
               <Link to="/contact" className="hover:text-gray-300">Contact Us</Link>
             </li>
+            <li>
+              <Link to="/chat" className="hover:text-gray-300">Chat</Link>
+            </li>
           </ul>
           <div className="sign-in">
             <Link to="/signin" className="text-white font-bold py-1 px-3 rounded bg-indigo-600 hover:bg-indigo-700">Sign In</Link>
