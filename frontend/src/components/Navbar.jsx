@@ -7,7 +7,7 @@ function Navbar() {
       <nav className="bg-gray-800 p-4">
         <div className="container mx-auto flex justify-between items-center">
           <div className="logo text-white text-xl font-bold cursor-pointer">MockAi</div>
-          <ul className="flex space-x-4 text-white font-bold	">
+          <ul className="flex space-x-4 text-white font-bold">
             <li>
               <Link to="/" className="hover:text-gray-300">Home</Link>
             </li>

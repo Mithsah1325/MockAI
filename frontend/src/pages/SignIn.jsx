@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'; // Step 1: Import useNavigate
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../firebase/firebase.js';
+import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import { auth, googleProvider } from '../firebase/firebase.js';
 
 
 function SignIn() {
@@ -24,8 +24,22 @@ function SignIn() {
       // Redirect to another page after successful sign-in
       navigate('/'); // Step 3: Redirect to the home page
     } catch (error) {
-      setError(error.message);
-      alert(error.message);
+      console.log(error.message);
+      setError("Invalid Login");
+
+
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      console.log('User signed in with Google:', result.user);
+      alert("Welcome, you are signed in with Google");
+      navigate('/');
+    } catch (error) {
+      console.log(error.message);
+      setError("Google Sign-In Failed");
     }
   };
 
@@ -67,9 +81,18 @@ function SignIn() {
           >
             Sign In
           </button>
+
+          <button
+            type="button"
+            onClick={handleGoogleSignIn}
+            className="w-full mt-4 bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+          >
+            Sign In with Google
+          </button>
+
           <p className="mt-4 text-center text-sm text-white">
             Don't have an account?{' '}
-            <Link to="/signup" className="bg-blue-700 hover:bg-blue-400">
+            <Link to="/signup" className="text-blue-400 hover:text-blue-700">
               Sign up
             </Link>
           </p>
