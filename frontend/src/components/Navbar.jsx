@@ -42,9 +42,11 @@ function Navbar() {
             <li>
               <Link to="/contact" className="hover:text-gray-300">Contact Us</Link>
             </li>
-            <li>
-              <Link to="/chat" className="hover:text-gray-300">Chat</Link>
-            </li>
+            {user && ( // Render Chat link only if user is authenticated
+              <li>
+                <Link to="/chat" className="hover:text-gray-300">Chat</Link>
+              </li>
+            )}
           </ul>
           {user ? (
             <div className="flex items-center">
