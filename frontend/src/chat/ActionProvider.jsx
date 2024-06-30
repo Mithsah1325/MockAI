@@ -1,6 +1,7 @@
 import React from 'react';
 
-const ActionProvider = ({ createChatBotMessage, setState, children }) => {
+
+const ActionProvider = ({ createChatBotMessage, setState, state, children }) => {
   const handleHello = () => {
     const botMessage = createChatBotMessage('Hello. Nice to meet you.');
 
@@ -24,13 +25,40 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
     }));
   };
 
+  const getResponse = async (botMessage) => {
+      const url = 'http://localhost:4000/chatbot';
+      const data = {
+          history: state.messages,
+          message: botMessage,
+      }
+  
+      try {
+          const response = await fetch(url, {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(data)
+          });
+  
+          if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+          }
+  
+          const responseData = await response.json();
+          console.log(responseData); // Handle the response data
+      } catch (error) {
+          console.error('Error:', error);
+      }
+  
+  };
+
   return (
     <div>
       {React.Children.map(children, (child) => {
         return React.cloneElement(child, {
           actions: {
-            handleHello,
-            handleDog,
+            getResponse,
           },
         });
       })}

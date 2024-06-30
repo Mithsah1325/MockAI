@@ -20,7 +20,7 @@ function About() {
         <h2 className="text-4xl font-extrabold text-center mb-4 mt-12">Our Story</h2>
         <div className="text-center text-gray-300 mb-8 lg:mb-16 sm:text-xl">
           <p className="mb-4">
-            We are students at Northern Kentucky University, Kentucky, pursuing our passions in technology and community service.
+            We are students at Northern Kentucky University, Kentucky, pursuing our passions in technology and community service. Hurray.
           </p>
           <p className="mb-4">
             Lorem 
