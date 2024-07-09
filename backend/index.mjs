@@ -51,11 +51,17 @@ app.post("/api/contact", (req, res) => {
 
 //for the chatbot response
 app.post("/chatbot", async (req, res) => {
-  const genAI = new GoogleGenerativeAI(process.env.API_KEY);
+  const apiKey = process.env.API_KEY;
 
-  const { history, message } = req.body;
+  if (!apiKey) {
+    return res.status(500).send("API key not found");
+  }
 
-  // Function to get the latest user message from the history
+  const genAI = new GoogleGenerativeAI(apiKey);
+
+  const { history } = req.body;
+  console.log(history);
+
   function getLatestUserMessage(history) {
     const userMessages = history.filter((msg) => msg.type === "user");
     return userMessages.length
@@ -63,25 +69,19 @@ app.post("/chatbot", async (req, res) => {
       : null;
   }
 
-  // Get the latest user message from the provided history
   const latestUserMessage = getLatestUserMessage(history);
-
-  // Log the latest user message
   console.log("Latest User Message:", latestUserMessage);
 
-  // Generate content using the genAI model
   try {
     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
     const prompt = latestUserMessage;
 
-    const result = await model.generateContent(prompt); // Ensure await is used for async function
+    const result = await model.generateContent(prompt);
     const response = await result.response;
 
-    const text = await response.text(); // Ensure await is used to get the text
-
+    const text = await response.text();
     console.log(text);
 
-    // Send the generated text as the response
     res.status(200).send({ text });
   } catch (error) {
     console.error("Error generating content:", error.message || error);

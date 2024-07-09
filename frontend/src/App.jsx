@@ -6,7 +6,7 @@ import SignIn from './pages/SignIn.jsx'
 import Navbar from './components/Navbar.jsx'
 import Footer from './components/Footer.jsx'
 import SignUp from './pages/SignUp.jsx'
-import Chat from './pages/Chat.jsx'
+import Chatbot from './pages/Chatbot.jsx'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 
@@ -21,7 +21,7 @@ const App = () => {
           <Route path='/' element={<Home />} />
           <Route path='/about' element={<About />} />
           <Route path='/contact' element={<Contact />} />
-          <Route path='/chat' element={<Chat />} />
+          <Route path='/chat' element={<Chatbot />} />
           <Route path='/signin' element={<SignIn />} />
           <Route path='/signup' element={<SignUp />} />
         </Routes>
